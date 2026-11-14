@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virziens – profesijas, prasmes un izglītības ceļi</title>
+  <meta name="description" content="Profesiju pārskats, noderīgas prasmes un izglītības ceļi vienuviet.">
+
+  <!-- Google Fonts: Orbitron (virsraksti), Exo 2 (Orbitron rezerve latviešu burtiem), IBM Plex Sans (teksts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Exo+2:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="izlaist" href="#saturs">Pāriet uz saturu</a>
+
+  <!-- ================= GALVENE ================= -->
+  <header id="galvene">
+    <div class="progress" aria-hidden="true"><span class="progress-josla"></span></div>
+    <div class="ietvars galvene-iekša">
+      <a href="#sakums" class="logo">Virziens</a>
+      <nav aria-label="Galvenā navigācija">
+        <a href="#profesijas">Profesijas</a>
+        <a href="#prasmes">Prasmes</a>
+        <a href="#izglitiba">Izglītība</a>
+        <a href="#miti">Mīti</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section id="sakums" class="hero">
+    <div class="ietvars hero-rezgis">
+
+      <div class="hero-teksts">
+        <h1 class="ielade">Karjera ir ceļš, nevis viens lēmums</h1>
+        <p class="ielade">Profesiju pārskats, prasmes, kas noder jebkurā darbā, un izglītības ceļi vienuviet. Bez spiediena izvēlēties tūlīt.</p>
+        <div class="hero-darbibas ielade">
+          <a href="#profesijas" class="poga">Izpētīt profesijas</a>
+          <a href="#izglitiba" class="saite">Salīdzināt izglītības ceļus</a>
+        </div>
+      </div>
+
+      <!-- Tablo ar profesijām -->
+      <div class="tablo ielade" aria-label="Profesiju piemēri">
+        <div class="tablo-galva" aria-hidden="true">
+          <span>Profesija</span>
+          <span>Nozare</span>
+          <span>Kur apgūt</span>
+        </div>
+        <ul id="tablo-rindas"></ul>
+      </div>
+
+    </div>
+  </section>
+
+  <main id="saturs">
+
+    <!-- ================= PROFESIJAS ================= -->
+    <section id="profesijas" class="sadala">
+      <div class="ietvars">
+        <div class="sadalas-galva">
+          <h2>Profesiju pārskats</h2>
+          <p>Meklē pēc nosaukuma vai atlasi nozari. Pie katras profesijas norādīts, ko tajā dara un kur to parasti apgūst.</p>
+        </div>
+
+        <div class="riki">
+          <label for="meklet" class="slepts">Meklēt profesiju</label>
+          <input type="search" id="meklet" placeholder="Meklēt, piem., dizains" autocomplete="off">
+
+          <div class="nozares" role="group" aria-label="Nozare">
+            <button type="button" class="nozare" data-nozare="visas" aria-pressed="true">Visas</button>
+            <button type="button" class="nozare" data-nozare="IT" aria-pressed="false">IT</button>
+            <button type="button" class="nozare" data-nozare="Radošās" aria-pressed="false">Radošās</button>
+            <button type="button" class="nozare" data-nozare="Veselība" aria-pressed="false">Veselība</button>
+            <button type="button" class="nozare" data-nozare="Tehnika" aria-pressed="false">Tehnika</button>
+            <button type="button" class="nozare" data-nozare="Sabiedrība" aria-pressed="false">Sabiedrība</button>
+            <button type="button" class="nozare" data-nozare="Daba" aria-pressed="false">Daba</button>
+          </div>
+        </div>
+
+        <p id="skaits" aria-live="polite"></p>
+
+        <div class="tabula" role="table" aria-label="Profesijas">
+          <div class="tabula-galva" role="row">
+            <span role="columnheader">Profesija</span>
+            <span role="columnheader">Ko dara</span>
+            <span role="columnheader">Kur apgūt</span>
+          </div>
+          <div id="profesiju-saraksts" role="rowgroup"></div>
+          <p id="nav-rezultatu">Šādu profesiju sarakstā nav. Pamēģini citu vārdu vai izvēlies „Visas”.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PRASMES ================= -->
+    <section id="prasmes" class="sadala sadala-balta">
+      <div class="ietvars divas-kolonnas">
+        <div class="sadalas-galva lipiga">
+          <h2>Prasmes, kas noder jebkurā profesijā</h2>
+          <p>Darba devēji tās bieži min līdzās profesionālajām zināšanām. Tās var attīstīt jebkurā vecumā un jebkurā jomā.</p>
+        </div>
+
+        <div class="akordeons">
+          <div class="prasme">
+            <button type="button" class="prasme-galva" aria-expanded="false">Komunikācija</button>
+            <div class="prasme-saturs"><p>Spēja skaidri izteikties, ieklausīties un pielāgot sakāmo klausītājam. Darbā tā nozīmē saprotamus e-pastus, prezentācijas un sarunas ar klientiem.</p></div>
+          </div>
+          <div class="prasme">
+            <button type="button" class="prasme-galva" aria-expanded="false">Kritiskā domāšana</button>
+            <div class="prasme-saturs"><p>Spēja izvērtēt informāciju, saskatīt cēloņus un pieņemt pamatotus lēmumus. Īpaši svarīga laikā, kad informācijas ir daudz, bet ne visa ir uzticama.</p></div>
+          </div>
+          <div class="prasme">
+            <button type="button" class="prasme-galva" aria-expanded="false">Sadarbība</button>
+            <div class="prasme-saturs"><p>Lielākā daļa darbu notiek komandā. Sadarbība ietver pienākumu sadali, atgriezenisko saiti un spēju vienoties arī tad, kad viedokļi atšķiras.</p></div>
+          </div>
+          <div class="prasme">
+            <button type="button" class="prasme-galva" aria-expanded="false">Pielāgošanās</button>
+            <div class="prasme-saturs"><p>Tehnoloģijas un darba veidi mainās. Spēja apgūt jaunus rīkus un mainīt pieeju ir viena no vērtīgākajām ilgtermiņa prasmēm.</p></div>
+          </div>
+          <div class="prasme">
+            <button type="button" class="prasme-galva" aria-expanded="false">Digitālās prasmes</button>
+            <div class="prasme-saturs"><p>No dokumentu un tabulu lietošanas līdz drošai rīcībai internetā. Gandrīz katrā profesijā ikdienā tiek izmantoti digitāli rīki.</p></div>
+          </div>
+          <div class="prasme">
+            <button type="button" class="prasme-galva" aria-expanded="false">Pašvadība</button>
+            <div class="prasme-saturs"><p>Laika plānošana, prioritāšu noteikšana un spēja pabeigt iesākto bez ārēja spiediena. Īpaši svarīga attālinātā un projektu darbā.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= IZGLĪTĪBA ================= -->
+    <section id="izglitiba" class="sadala">
+      <div class="ietvars">
+        <div class="sadalas-galva">
+          <h2>Izglītības ceļi</h2>
+          <p>Uz vienu profesiju bieži ved vairāki ceļi. Šeit to galvenās atšķirības.</p>
+        </div>
+
+        <div class="cilnes" role="tablist" aria-label="Izglītības veidi">
+          <button type="button" class="cilne aktiva" role="tab" aria-selected="true" data-cilne="0">Augstskola</button>
+          <button type="button" class="cilne" role="tab" aria-selected="false" data-cilne="1">Koledža</button>
+          <button type="button" class="cilne" role="tab" aria-selected="false" data-cilne="2">Profesionālā izglītība</button>
+          <button type="button" class="cilne" role="tab" aria-selected="false" data-cilne="3">Kursi un pašmācība</button>
+          <span class="cilnes-indikators" aria-hidden="true"></span>
+        </div>
+
+        <div id="cilnes-panelis" role="tabpanel">
+          <div class="panelis-ievads">
+            <h3 id="panelis-virsraksts"></h3>
+            <p id="panelis-apraksts"></p>
+          </div>
+          <dl class="panelis-fakti">
+            <div><dt>Ilgums</dt><dd id="fakts-ilgums"></dd></div>
+            <div><dt>Rezultāts</dt><dd id="fakts-rezultats"></dd></div>
+            <div><dt>Piemērots</dt><dd id="fakts-piemerots"></dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MĪTI ================= -->
+    <section id="miti" class="sadala sadala-tumsa">
+      <div class="ietvars">
+        <div class="sadalas-galva">
+          <h2>Izplatīti mīti par karjeru</h2>
+          <p>Noklikšķini uz apgalvojuma, lai redzētu, kā ir patiesībā.</p>
+        </div>
+
+        <div class="mitu-rezgis">
+          <button type="button" class="mits" aria-pressed="false"
+                  data-mits="Profesija jāizvēlas vienreiz un uz visu mūžu."
+                  data-fakts="Daudzi cilvēki karjeras laikā vairākas reizes maina virzienu. Pirmā izvēle ir sākumpunkts, nevis galīgs lēmums.">
+            <span class="mits-birka">Mīts</span>
+            <span class="mits-teksts">Profesija jāizvēlas vienreiz un uz visu mūžu.</span>
+          </button>
+          <button type="button" class="mits" aria-pressed="false"
+                  data-mits="Labu darbu var iegūt tikai ar augstāko izglītību."
+                  data-fakts="Daudzas pieprasītas profesijas apgūst profesionālās izglītības iestādēs vai kursos, piemēram, elektriķi, metinātāji un pavāri.">
+            <span class="mits-birka">Mīts</span>
+            <span class="mits-teksts">Labu darbu var iegūt tikai ar augstāko izglītību.</span>
+          </button>
+          <button type="button" class="mits" aria-pressed="false"
+                  data-mits="Tehnoloģiju nozarē strādā tikai programmētāji."
+                  data-fakts="Tajā strādā arī dizaineri, testētāji, analītiķi, tekstu autori un projektu vadītāji.">
+            <span class="mits-birka">Mīts</span>
+            <span class="mits-teksts">Tehnoloģiju nozarē strādā tikai programmētāji.</span>
+          </button>
+          <button type="button" class="mits" aria-pressed="false"
+                  data-mits="Hobijs nevar kļūt par profesiju."
+                  data-fakts="No zīmēšanas, sporta, gatavošanas un spēlēm izaug īstas profesijas. Interese ir labs sākums prasmju attīstīšanai.">
+            <span class="mits-birka">Mīts</span>
+            <span class="mits-teksts">Hobijs nevar kļūt par profesiju.</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="ietvars kajene">
+      <a href="#sakums" class="logo">Virziens</a>
+      <p>Informācija par profesijām, prasmēm un izglītības ceļiem.</p>
+    </div>
+  </footer>
+
+  <!-- jQuery (jāielādē pirms script.js) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
