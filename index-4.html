@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karjeras motivācija</title>
+
+<!-- Google Fonts: Orbitron (+ Exo 2 latviešu burtiem ā, š, ņ u.c.) -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- jQuery bibliotēka -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<style>
+  body {
+    font-family: 'Orbitron', 'Exo 2', sans-serif;
+    margin: 0;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #fff;
+  }
+
+  /* Galvenā daļa */
+  .hero {
+    text-align: center;
+    padding: 90px 20px 40px;
+  }
+  .hero > * { display: none; } /* jQuery tos parāda pa vienam */
+  .hero h1 { font-size: 42px; margin: 0 0 10px; }
+  .hero .mazs { color: #888; letter-spacing: 4px; font-size: 13px; }
+
+  /* Vārdi virsrakstā, kas "palec" zem peles */
+  .vards { position: relative; display: inline-block; cursor: default; }
+
+  /* Citāts */
+  .citats {
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-style: italic;
+    min-height: 30px;
+  }
+
+  /* Satura sadaļas */
+  .sadala {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+  .sadala h2 { text-align: center; margin-top: 0; }
+  .padoms-teksts { text-align: center; font-size: 12px; color: #777; margin-top: -10px; }
+
+  /* Divas kolonnas */
+  .divas-kolonnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .saraksts { list-style: none; padding: 0; }
+  .saraksts li {
+    padding: 6px 0;
+    cursor: default;
+  }
+
+  /* Trīs kolonnas */
+  .tris-kolonnas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .profesija h3 { margin-top: 0; }
+
+  /* Akordeons */
+  .padoms h3 { cursor: pointer; margin: 0; padding: 12px 0; }
+  .padoms h3:hover { color: #666; }
+  .padoms p { display: none; margin-top: 0; padding-bottom: 16px; }
+
+  /* Moto */
+  .moto-sadala { text-align: center; }
+  #moto { font-size: 32px; font-weight: bold; cursor: pointer; user-select: none; }
+  #moto-papildus { display: none; font-size: 18px; }
+
+  /* Sadaļas, kas "uzpeld" ritinot */
+  .uzpeld { opacity: 0; position: relative; top: 40px; }
+
+  /* Šauriem ekrāniem – viena kolonna */
+  @media (max-width: 700px) {
+    .divas-kolonnas, .tris-kolonnas { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 30px; }
+  }
+</style>
+
+<script>
+$(document).ready(function(){
+
+  // 1. EFEKTS: fadeIn() + delay()  →  notiek automātiski, ielādējot lapu
+  // Galvenās daļas rindas parādās viena pēc otras
+  $(".hero > *").each(function(i){
+    $(this).delay(i * 600).fadeIn(1000);
+  });
+
+
+  // 2. EFEKTS: fadeOut() + fadeIn()  →  notiek automātiski ik pēc 5 sekundēm
+  // Citāti mainās paši no sevis
+  var citati = [
+    "„Nav jābūt labākajam. Jābūt labākam nekā vakar.”",
+    "„Katrs eksperts kādreiz bija iesācējs.”",
+    "„Lieli mērķi biedē. Tāpēc tie ir tā vērti.”",
+    "„Tavs nākotnes es pateiks paldies par šodienu.”"
+  ];
+  var nr = 0;
+  setInterval(function(){
+    $("#citats").fadeOut(600, function(){
+      nr = (nr + 1) % citati.length;
+      $(this).text(citati[nr]).fadeIn(600);
+    });
+  }, 5000);
+
+
+  // 3. EFEKTS: animate()  →  uzbraucot ar peli uz saraksta rindas
+  // Rinda pabīdās pa labi
+  $(".saraksts li").hover(
+    function(){ $(this).stop().animate({ paddingLeft: "20px" }, 200); },
+    function(){ $(this).stop().animate({ paddingLeft: "0px" }, 200); }
+  );
+
+
+  // 4. EFEKTS: fadeTo()  →  uzbraucot ar peli uz profesijas
+  // Pārējās profesijas kļūst blāvas
+  $(".profesija").hover(
+    function(){ $(this).siblings().stop().fadeTo(300, 0.35); },
+    function(){ $(this).siblings().stop().fadeTo(300, 1); }
+  );
+
+
+  // 5. EFEKTS: slideUp() / slideDown()  →  klikšķis uz padoma virsraksta
+  // Atveras viens padoms, pārējie aizveras
+  $(".padoms h3").click(function(){
+    var teksts = $(this).next("p");
+    $(".padoms p").not(teksts).slideUp(300);
+    teksts.slideToggle(300);
+  });
+
+
+  // 6. EFEKTS: toggle() ar ātrumu  →  dubultklikšķis uz moto
+  // Parādās vai paslēpjas slēptais teikums
+  $("#moto").dblclick(function(){
+    $("#moto-papildus").toggle("slow");
+  });
+
+
+  // 7. EFEKTS: animate() ar opacity un top  →  ritinot lapu
+  // Sadaļas "uzpeld", kad parādās ekrānā
+  function paraditSadalas(){
+    var ekranaApaksa = $(window).scrollTop() + $(window).height();
+    $(".uzpeld").each(function(){
+      if ($(this).offset().top < ekranaApaksa - 80) {
+        $(this).removeClass("uzpeld").animate({ opacity: 1, top: 0 }, 800);
+      }
+    });
+  }
+  $(window).scroll(paraditSadalas);
+  paraditSadalas(); // pārbaudām arī uzreiz pēc ielādes
+
+
+  // 8. EFEKTS: animate() ar mouseenter  →  uzbraucot ar peli uz virsraksta vārda
+  // Katrs vārds "palec" uz augšu un nokrīt atpakaļ
+  var vardi = $(".hero h1").text().split(" ");
+  $(".hero h1").empty();
+  $.each(vardi, function(i, vards){
+    $("<span class='vards'></span>").text(vards).appendTo(".hero h1");
+    $(".hero h1").append(" ");
+  });
+
+  $(".vards").mouseenter(function(){
+    $(this).stop(true)
+      .animate({ top: "-15px" }, 150)
+      .animate({ top: "0px" }, 250);
+  });
+
+});
+</script>
+</head>
+<body>
+
+<!-- GALVENĀ DAĻA -->
+<div class="hero">
+  <p class="mazs">KARJERAS MOTIVĀCIJA</p>
+  <h1>Tava karjera sākas šodien</h1>
+  <p>Šī lapa ir domāta tiem, kas domā par savu nākotni un meklē iedvesmu.</p>
+</div>
+
+<!-- CITĀTS (mainās automātiski) -->
+<div class="citats">
+  <p id="citats">„Nav jābūt labākajam. Jābūt labākam nekā vakar.”</p>
+</div>
+
+
+<!-- DIVAS KOLONNAS -->
+<div class="sadala uzpeld">
+  <h2>Kāpēc karjera ir svarīga?</h2>
+  <div class="divas-kolonnas">
+    <div>
+      <p>Darbs aizņem lielu daļu no mūsu dzīves. Ja tu dari to, kas tev patīk, katra diena kļūst jēgpilnāka.</p>
+      <p>Karjera nav tikai alga – tā ir iespēja augt, mācīties un dot labumu citiem. Tev nav jāzina viss uzreiz, svarīgi ir sākt.</p>
+    </div>
+    <ul class="saraksts">
+      <li>→ Iespēja darīt to, kas patīk</li>
+      <li>→ Jaunas zināšanas un prasmes</li>
+      <li>→ Finansiāla neatkarība</li>
+      <li>→ Interesanti cilvēki apkārt</li>
+      <li>→ Sajūta, ka dari ko nozīmīgu</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- TRĪS KOLONNAS -->
+<div class="sadala uzpeld">
+  <h2>Kādu ceļu izvēlēties?</h2>
+  <div class="tris-kolonnas">
+    <div class="profesija">
+      <h3>Tehnoloģijas</h3>
+      <p>Programmētāji, datu analītiķi un IT speciālisti veido rīkus, ko katru dienu lieto miljoniem cilvēku.</p>
+    </div>
+    <div class="profesija">
+      <h3>Radošums</h3>
+      <p>Dizaineri, rakstnieki un video veidotāji pārvērš idejas par kaut ko, ko var redzēt un sajust.</p>
+    </div>
+    <div class="profesija">
+      <h3>Palīdzība citiem</h3>
+      <p>Ārsti, skolotāji un psihologi katru dienu maina cilvēku dzīves uz labu.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- AKORDEONS -->
+<div class="sadala uzpeld" style="max-width: 700px;">
+  <h2>Padomi veiksmei</h2>
+  <p class="padoms-teksts">Noklikšķini uz padoma, lai to atvērtu</p>
+
+  <div class="padoms">
+    <h3>01 // Mācies katru dienu</h3>
+    <p>Pat 20 minūtes dienā gada laikā sakrājas vairāk nekā 120 stundās jaunu zināšanu.</p>
+  </div>
+  <div class="padoms">
+    <h3>02 // Neizvairies no kļūdām</h3>
+    <p>Kļūdas tevi māca. Katra neveiksme parāda, ko nākamreiz darīt citādi.</p>
+  </div>
+  <div class="padoms">
+    <h3>03 // Iepazīsties ar cilvēkiem</h3>
+    <p>Aprunājies ar kādu, kurš strādā tevi interesējošā jomā. Viena saruna var atvērt jaunas durvis.</p>
+  </div>
+  <div class="padoms">
+    <h3>04 // Izvirzi skaidrus mērķus</h3>
+    <p>Pieraksti, ko vēlies sasniegt pēc mēneša, gada un piecu gadu laikā.</p>
+  </div>
+</div>
+
+
+<!-- MOTO -->
+<div class="sadala moto-sadala uzpeld">
+  <p class="padoms-teksts">Uzklikšķini divreiz uz teikuma</p>
+  <p id="moto">Es varu sasniegt vairāk!</p>
+  <p id="moto-papildus">Un es sākšu jau šodien.</p>
+</div>
+
+</body>
+</html>
